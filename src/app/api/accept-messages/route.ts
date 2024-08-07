@@ -7,19 +7,19 @@ import {User} from 'next-auth'
 export async function POST(req:Request){
     await dbConnect();
     try {
-        // const session = await getServerSession(authOptions)
-        // const user : User = session?.user as User;
+        const session = await getServerSession(authOptions)
+        const user : User = session?.user as User;
 
-        // if(!session || !session.user){
-        //     return Response.json({
-        //         success:false,
-        //         message:"Not Logged In"
-        //     },{status:400})
-        // }
+        if(!session || !session.user){
+            return Response.json({
+                success:false,
+                message:"Not Logged In"
+            },{status:400})
+        }
 
-        // // console.log(user)
-        // const userId = user?._id;
-        const {isAcceptingMessages,userId} = await req.json();
+        // console.log(user)
+        const userId = user?._id;
+        const {isAcceptingMessages} = await req.json();
 
         const updatedUser = await UserModel.findByIdAndUpdate(userId,{isAcceptingMessage:isAcceptingMessages},{new:true})
 
@@ -40,6 +40,41 @@ export async function POST(req:Request){
         console.log("Error in accept-message route : ",error)
         return Response.json({
             success:true,
+            message:"Internal Server Error"
+        },{status:500})
+    }
+}
+
+export async function GET(req:Request){
+    await dbConnect();
+    try {
+        const session = await getServerSession(authOptions)
+        const user : User = session?.user as User;
+
+        if(!session || !session.user){
+            return Response.json({
+                success:false,
+                message:"Not Logged In"
+            },{status:400})
+        }
+        const userId = user?._id;
+        const dbUser = await UserModel.findById(userId);
+        if(!dbUser){
+            return Response.json({
+                success:false,
+                message:"user not found"
+            },{status:404})
+        }
+
+        return Response.json({
+            success:true,
+            message:"User found",
+            isAcceptingMessages:dbUser.isAcceptingMessage
+        },{status:200})
+    } catch (error) {
+        console.log("Error occured in accept -message route : ",error)
+        return Response.json({
+            success:false,
             message:"Internal Server Error"
         },{status:500})
     }
