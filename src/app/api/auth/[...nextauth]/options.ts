@@ -17,7 +17,7 @@ export const authOptions:NextAuthOptions = {
                password:{
                    label:"Password",
                    type:"password"
-               }
+               },
            },
            async authorize(credentials:any):Promise<any> {
                await dbConnect();
@@ -74,7 +74,8 @@ export const authOptions:NextAuthOptions = {
     }
    },
    pages:{
-    signIn:'/sign-in'
+    signIn:'/sign-in',
+    signOut:'/',
    },
    session:{
     strategy:'jwt'

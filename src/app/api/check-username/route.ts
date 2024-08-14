@@ -11,7 +11,7 @@ const UsernameQuerySchema = z.object({
 export async function GET(req:NextRequest){
     try {
         await dbConnect();
-        // console.log(req);
+        console.log(req.url);
         // return
         const {searchParams} = new URL(req.url)
 
@@ -33,8 +33,8 @@ export async function GET(req:NextRequest){
         const {username} = result.data
         // console.log(username)
         const user = await UserModel.find({username:username,isVerified:true})
-        // console.log(user);
-        if(user){
+        // console.log(user.length);
+        if(user.length){
             return Response.json({
                 success:false,
                 message:"Username already exist!"

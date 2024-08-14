@@ -10,7 +10,7 @@ export async function POST(req:Request){
         if(!msg.trim()){
             return Response.json({
                 success:false,
-                messaage:"Empty Message"
+                message:"Empty Message"
             },{status:401})
         }
         if(!user){

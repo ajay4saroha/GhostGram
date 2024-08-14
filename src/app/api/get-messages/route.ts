@@ -17,10 +17,11 @@ export async function GET(req:Request){
             },{status:400})
         }
         const userId = new mongoose.Types.ObjectId(user._id);
+        // console.log("User ID----->",userId);
         const dbUser = await UserModel.aggregate([
             {
                 $match:{
-                    id:userId
+                    _id:userId
                 }
             },
             {
@@ -40,16 +41,17 @@ export async function GET(req:Request){
                 }
             }
         ])
-        if(!dbUser || dbUser.length===0){
+        // console.log("DB USER ------>",dbUser)
+        if(!dbUser){
             return Response.json({
                 success:false,
                 message:"user not found"
             },{status:404})
         }
-
+        // console.log("Messages----->",dbUser)
         return Response.json({
             success:true,
-            messages:dbUser[0].messages
+            messages:dbUser.length ? dbUser[0].messages:[]
         },{status:200})
     } catch (error) {
         console.log("Error occured in get-messages--->",error);

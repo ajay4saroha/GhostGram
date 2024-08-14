@@ -16,10 +16,9 @@ export async function sendVerificationEmail(
             subject:"GhostGram | Verfication Code",
             react:VerificationEmail({username,otp:verificationCode}),
         })
-        return {success:false,message:"Failed to send"}
+        return {success:true,message:"Sent Successfully"}
     } catch (error) {
         console.error("Error sending verfication email",error);
         return {success:false,message:"Failed to send"}
-        
     }
 }
