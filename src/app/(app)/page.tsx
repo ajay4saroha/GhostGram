@@ -3,9 +3,8 @@ import { User } from '@/models/User';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
-import { Button } from '@/components/ui/button';
-import { Link } from 'lucide-react';
-export default function page() {
+
+export default function HomePage() {
   const router = useRouter();
   const {data:session} = useSession()
   const user :User = session?.user as User

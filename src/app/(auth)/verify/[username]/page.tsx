@@ -25,7 +25,7 @@ import { Input } from "@/components/ui/input"
 
 
 
-export default function page() {
+export default function VeifacationPage() {
   const [isVerifying,setIsVerifying] = useState<boolean>(false);
   // const [verificationMsg,setVerificationMsg] = useState<string>("");
   const router = useRouter()
