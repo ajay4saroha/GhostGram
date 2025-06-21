@@ -17,7 +17,7 @@ import { Switch } from '@/components/ui/switch';
 import MsgCard from '@/components/customized/MsgCard';
 
 
-export default function page() {
+export default function POST() {
   // const router = useRouter()
   const [messages,setMessages] = useState<Message[]>([]);
   const [isLoading,setIsLoading] = useState<boolean>(false);
