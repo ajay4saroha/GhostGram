@@ -17,14 +17,13 @@ import { Switch } from '@/components/ui/switch';
 import MsgCard from '@/components/customized/MsgCard';
 
 
-export default function POST() {
+export default function Dashboard() {
   // const router = useRouter()
   const [messages,setMessages] = useState<Message[]>([]);
   const [isLoading,setIsLoading] = useState<boolean>(false);
   const [isSwitchLoading,setIsSwitchLoading] = useState<boolean>(false);
-
-  // const [username,setUsername] = useState<string>('');
-  // const [profileUrl,setProfileUrl] = useState<string>('');
+  const [username,setUsername] = useState<string>('');
+  const [profileUrl,setProfileUrl] = useState<string>('');
   // const [isAcceptingMessagesStatus,setIsAcceptingMessagesStatus] = useState<boolean>(false);
   const {data:session} = useSession();
   const {toast} = useToast()
@@ -105,6 +104,11 @@ export default function POST() {
     }
   },[setIsLoading,setIsSwitchLoading,toast])
 
+  useEffect(() => {
+    setUsername(session?.user.username as string)
+    setProfileUrl(`${window.location.protocol}/${window.location.host}/u/${username}`)
+  }, [window]);
+
   useEffect(()=>{
     if(!session || !user){
       return;
@@ -138,8 +142,7 @@ export default function POST() {
     }
   },[acceptMessagesStatus])
 
-  const username = session?.user.username as string
-  const profileUrl = `${window.location.protocol}/${window.location.host}/u/${username}`
+  
   
   const cpyToClipboard = () => {
     navigator.clipboard.writeText(profileUrl)

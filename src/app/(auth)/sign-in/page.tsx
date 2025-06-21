@@ -16,7 +16,7 @@ import * as z from 'zod'
 import { Loader2 } from 'lucide-react';
 
 
-export default function page() {
+export default function SignInPage() {
   const {toast} = useToast()
   const router = useRouter()
   // const [isSigning,setIsSigning] = useState<boolean>(false);

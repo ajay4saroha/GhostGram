@@ -16,7 +16,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
 
-export default function page() {
+export default function SignUpPage() {
   const [username,setUsername] = useState<string>('');
   const [usernameMsg,setUsernameMsg] = useState<string>('');
   const [isCheckingUsername,setIsCheckingUsername] = useState<boolean>(false);

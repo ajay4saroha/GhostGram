@@ -13,7 +13,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { ApiResponse } from '@/types/ApiResponse';
 
 
-export default function page() {
+export default function SendMessagePage() {
   const router = useRouter()
   const params = useParams<{username:string}>();
   const [message,setMessage] = useState<string>("");
